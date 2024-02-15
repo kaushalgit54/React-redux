@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useSelector } from "react-redux";
+import classes from './App.module.css';
+import Counter from "./components/Counter";
+import Auth from '../src/components/Auth';
+import Header from '../src/components/Header';
+import UserProfile from "./components/UserProfile";
+function App(){
+  const isAuth = useSelector(state =>state.auth.isAuthenticated);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  return(
+    <React.Fragment className={classes.App}>
+      <Header/>
+      {!isAuth && <Auth/>}
+      {isAuth && <UserProfile/>}
+      <Counter/>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
